@@ -19,6 +19,7 @@ exports.new = (req, res) ->
 	res.render('survey_new')
 	
 exports.create = (req, res) ->
+	console.log('Creating...')
 	Survey = mongoose.model('Survey')
 	if req.param('title')?
 		survey = new Survey({

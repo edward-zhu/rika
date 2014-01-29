@@ -22,12 +22,14 @@ app.configure ->
 if 'development' == app.get('env')
 	app.use express.errorHandler()
 
-mongoose.connect("mongodb://localhost/survey")
-
-survey = require './controllers/survey_controller'
+mongoose.connect("mongodb://edward:mtmtmt@troup.mongohq.com:10018/survey")
 
 require './models/Survey'
 require './models/Response'
+
+survey = require './controllers/survey_controller'
+
+
 response = require './controllers/response_controller'
 question = require './controllers/question_controller'
 answer = require './controllers/answer_controller'
