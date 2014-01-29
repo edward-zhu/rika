@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}{% parent %} - 新调查{% endblock %}
+
+{% block head %}
+	
+	<link rel="stylesheet" href="/css/survey.css" type="text/css" charset="utf-8">
+	{% parent %}
+{% endblock %}
+
+{% block content %}
+	<div class="twelve wide column">
+		<h2 class="ui header">
+			新问卷设计
+			<div class="sub header">new survey</div>
+		</h2>
+		<div class="ui blue message">
+			<i class="ui info icon"></i>
+			问卷内容什么的之后再添加吧~
+		</div>
+		
+		<div class="ui form segment" id="survey_form">
+		<div class="ui error message"></div>
+			<div class="field">
+				<label>名称</label>
+				<input placeholder="输入问卷的名称" type="text" id="survey_title">
+			</div>
+			<div class="two fields">
+				<div class="field">
+					<label>邮箱</label>
+					<input placeholder="输入您的邮箱" type="text" id="survey_email">
+				</div>
+				<div class="field">
+					<label>管理密码</label>
+					<input placeholder="输入管理密码" type="password" id="survey_pass">
+				</div>
+			</div>
+			<a class = "ui blue submit button" id="submit_button">新建问卷</a>
+		</div>
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script src="/javascript/survey_new.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}

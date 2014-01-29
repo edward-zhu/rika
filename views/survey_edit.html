@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+
+{% block title %}{% parent %} - 调查设计{% endblock %}
+
+{% block head %}
+	
+	<link rel="stylesheet" href="/css/survey.css" type="text/css" charset="utf-8">
+	{% parent %}
+{% endblock %}
+
+{% block content %}
+	<div class="sixteen wide column">
+		<h2 class="ui header">
+			问卷设计
+			<div class="sub header">编辑问卷内容</div>
+		</h2>
+		
+		<div id="question_table">
+			<table class="ui table segment">
+			<thead>
+				<tr>
+					<th class="six wide">问题</th>
+					<th class="four wide">类型</th>
+					<th class="six wide">选项</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>第一个问题</td>
+					<td>单项选择</td>
+					<td>A B C</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+		<div class="ui grid">
+			<div class="ten wide column">
+				<div class="ui segment">
+					<h3 class="ui header">新建问题</h3>
+					<div class="ui form">
+						<div class="ui error message"></div>
+						<div class="ui grid">
+							<div class="four wide column field">
+								<label>问题类型</label>
+								<div class="ui selection dropdown">
+								  <input type="hidden" name="question_type" id="question_type">
+								  <div class="text">单项选择</div>
+								  <i class="dropdown icon"></i>
+								  <div class="menu">
+								    <div class="item" data-value="text">文本</div>
+								    <div class="item" data-value="multiple">多项选择</div>
+										<div class="item active" data-value="single">单项选择</div>
+								  </div>
+								</div>
+							</div>
+							<div class="twelve wide column field">
+								<label>问题</label>
+								<input placeholder="输入问题内容" type="text" id="question_name">
+							</div>
+						</div>
+						<div class="field">
+							<label>选项</label>
+							<input placeholder="输入问题选项，选项间用空格分隔（文本类问题请留空）" type="text" id="question_answer">
+						</div>
+						<div class="ui labeled green icon submit button"><i class="add icon"></i>添加问题</div>
+					</div>
+				</div>
+			</div>
+			<div class="six wide column">
+				<div class="ui raised segment">
+					<h3 clcass="ui header">更改问题顺序</h3>
+					<p><i class="info icon"></i>请先将表格中的问题拖动至正确顺序，然后按下面的按钮确认更改。</p>
+					<div class="ui blue button" id="changeOrder">更改顺序</div>
+				</div>
+				<div class="ui raised segment">
+					<h3 clcass="ui header">分支跳转</h3>
+					<p>
+						<i class="info icon"></i>
+						您可以在单项选择类型的问题中加入符号
+						<div class="ui segment"><b>"答案[目标问题编号]"</b></div>
+						例如:
+						<div class="ui segment"><b>"是[1] 否[2]"</b></div>
+						当填写人选择“是”即会调至问题1，选择“否”则会调至问题2。
+					</p>
+				</div>
+				
+			</div>
+		</div>
+		
+		<input type="hidden" id="survey_id" value="{{ id }}">
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script src="/javascript/mustache.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/javascript/survey_edit.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/javascript/jquery.sortable.min.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}

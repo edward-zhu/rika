@@ -1,0 +1,31 @@
+body {
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+.ui.small.form label {
+	font-weight: bold;
+}
+
+.ui.small.form {
+	/*font-size: 0.875em;*/
+}
+
+.masthead {
+	margin-top:38px;
+	padding: 50px 0px;
+	background-color: #005899;
+	color: #FFF;
+	text-align: center;
+	border-radius: 10px;
+}
+
+.masthead header {
+	font-size: 3em;
+	font-weight: bold;
+	text-shadow: 2px 2px 2px #CCC;
+}
+
+.masthead .introduction {
+	padding-bottom: 10px;
+}
+

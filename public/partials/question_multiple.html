@@ -1,0 +1,25 @@
+<div class="ui basic segment" id="question_header">
+	<h3>
+		<div class="sub_title">#{{ id }}</div>
+		{{ question }}
+	</h3>
+	<span class="ui inverted orange circular segment progress_show">
+		<span class="current">{{ id }}</span><span class="total">/{{ total }}</span>
+	</span>
+</div>
+<div class="ui raised segment" id="inner_form">
+	<div class="ui small error message"></div>
+  <div class="grouped inline fields">
+		{{#answers}}
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="answer" value="{{ _id }}">
+        <label>{{ answer }}</label>
+      </div>     
+    </div>
+		{{/answers}}
+  </div>
+</div>
+<div class="ui aligned left basic segment">
+	<div class="ui submit blue button">下一个</div>
+</div>

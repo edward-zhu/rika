@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}{% parent %} - 主页{% endblock %}
+
+{% block head %}
+	{% parent %}
+	<link rel="stylesheet" href="/css/index.css" type="text/css" charset="utf-8">
+{% endblock %}
+
+{% block content %}
+	<div class="masthead segment">
+		<div class="ui page grid">
+			<div class="column">
+			<div class="introduction">
+				<header>Rika</header>
+				一个简单的基于Node.js的问卷调查应用。
+			</div>
+			<span class="create">
+					<a class="ui orange button" href="/new">创建问卷</a>
+			</span>
+			</div>
+			</div>
+	</div>
+{% endblock %}
+	

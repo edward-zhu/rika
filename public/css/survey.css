@@ -1,0 +1,88 @@
+.item h4 {
+	margin-top:1em;
+	padding-top: 0.5em;
+	margin-bottom:0.25em;
+}
+
+#question span a {
+	color : rgba(255, 255, 255, 0);
+}
+
+#question span a:visited {
+	color : rgba(255, 255, 255, 0);
+}
+
+#q_name: {
+	width : 200px;
+}
+
+#question span:hover {
+	color : #666;
+}
+
+#question span:hover a {
+	color : rgba(153, 153, 153, 1);
+	text-decoration : none;
+}
+
+.sortable-placeholder {
+	height : 20px;
+	/*border-top : 2px solid #666;*/
+}
+
+
+#question_form h3{
+	font-size : 1.5em;
+	clear: none;
+	float: left;
+	width: auto;
+	margin : 1em 0em;
+}
+
+#question_form .sub_title {
+	color: #666;
+	font-weight : normal;
+	font-size: 0.75em;
+}
+
+#question_form .progress_show {
+	font-size: 2.75em;
+	margin: 0px;
+	padding:0.25em;
+	position : absolute;
+	right : 0.5em;
+	width : 1.875em;
+	font-weight : bold;
+}
+
+#question_form .current {
+	color : #FFF;
+}
+
+#question_form .progress_show .total {
+	font-size : 0.5em;
+	color : rgb(243, 237, 227);
+}
+
+#question_header {
+	margin-bottom: 0em;
+	padding-bottom: 0em;
+}
+
+#inner_form {
+	max-width : 28em;
+	min-width : 10em;
+	margin-left : 20px;
+	margin-top : 0px;
+	padding-bottom : 0.75em;
+}
+
+.checkbox {
+	margin-top : 0.25em;
+	margin-bottom : 0.25em;
+}
+
+#go_button {
+	margin-top : 0.25em;
+	padding-top : 0.25em;
+}

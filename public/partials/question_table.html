@@ -1,0 +1,30 @@
+<table class="ui table segment">
+	<thead>
+		<tr>
+			<th class="six wide">问题</th>
+			<th class="four wide">类型</th>
+			<th class="five wide">选项</th>
+			<th class="one wide">删除</th>
+		</tr>
+	</thead>
+	<tbody class="sortable">
+		{{#questions}}
+		<tr>
+			<td id="question">
+				<span id="q_name" data-value="{{ _id }}">
+					(#{{ id }}){{ question }}
+				</span>
+			</td>
+			<td>{{type}}</td>
+			<td>
+				{{#answers}}
+				<span data-value="{{ _id }}">{{ answer }}</span>
+				{{/answers}}
+			</td>
+			<td>
+				<div class="ui mini icon orange button" id="delete" data-value="{{ _id }}"><i class="trash icon"></i></div>
+			</td>
+		</tr>
+		{{/questions}}
+	</tbody>
+</table>

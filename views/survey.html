@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}{% parent %} - {{ survey.title }}{% endblock %}
+
+{% block head %}
+	{% parent %}
+	<link rel="stylesheet" href="/css/survey.css" type="text/css" charset="utf-8">
+{% endblock %}
+
+{% block content %}
+		<h2 class="ui header">
+			<div class="sub header"> 问卷填写 </div>
+			{{survey.title}}
+		</h2>
+		<div class="ui grid">
+			<div class="ten wide column">
+				<div class="ui form segment" id="question_form">
+					<div class="ui basic segment">
+						<h3>准备开始吧！<div class="sub_title">点击下面的按钮开始填写这份问卷。</h3>
+					</div>
+					<div class="ui aligned left basic segment" id="go_button">
+						<div class="ui labeled icon orange button" id="go">
+							<i class="ui play icon"></i>
+							开始
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="six wide column">
+				<div class="ui raised segment">
+					<h3 class="ui header">隐私保护</h3>
+					<div class="ui yellow message">
+						<i class="ui warning icon"></i>
+					我们只会对每个问卷填写者记录一个<strong>随机生成的识别码</strong>，
+					除此之外，只有您所填写的回答会被服务器保存。
+					我们<strong>不会记录您任何个人信息</strong>，包括IP地址。
+					同时，问卷内容中若出现询问隐私的问题，<strong>请谨慎填写</strong>。
+					</div>
+				</div>
+			</div>
+		</div>
+		<input type="hidden" id="survey_id" value="{{ survey._id }}">
+{% endblock %}
+		
+{% block js %}
+	<script src="/javascript/sha1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/javascript/mustache.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/javascript/survey.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+	

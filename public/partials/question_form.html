@@ -1,0 +1,27 @@
+<div class="item">
+	<h4 class="header">问题1</h4>
+	<div class="ui grid">
+		<div class="four wide column field">
+			<label>问题类型</label>
+			<div class="ui selection dropdown">
+			  <input type="hidden" name="question_type">
+			  <div class="text">单项选择</div>
+			  <i class="dropdown icon"></i>
+			  <div class="menu">
+			    <div class="item" data-value="2">文本</div>
+			    <div class="item" data-value="1">多项选择</div>
+					<div class="item active" data-value="0">单项选择</div>
+			  </div>
+			</div>
+		</div>
+		<div class="twelve wide column field">
+			<label>问题</label>
+			<input placeholder="输入问题内容" type="text" id="question_name">
+		</div>
+	</div>
+	<div class="field">
+		<label>选项</label>
+		<input placeholder="输入问题选项，选项间用空格分隔（文本类问题请留空）" type="text" id="question_answer">
+	</div>
+	<a class="ui mini red button" id="test_button">删除</a>
+</div>

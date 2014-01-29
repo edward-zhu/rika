@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css" media="screen">
+		#chart {
+			width : 100px;
+			height : 100px;
+		}
+		</style>
+	</head>
+	<body>
+		<canvas width="100" height="100" id="chart"></canvas>
+		<script type="text/javascript" charset="utf-8">
+		function backingScale(context) {
+		    if ('devicePixelRatio' in window) {
+		        if (window.devicePixelRatio > 1) {
+		            return window.devicePixelRatio;
+		        }
+		    }
+		    return 1;
+		}
+		var chart = document.getElementById("chart");
+		var context = chart.getContext("2d");
+		var scaleFactor = backingScale(chart);
+		console.log(scaleFactor);
+		if (scaleFactor > 1) {
+			chart.width = chart.width * scaleFactor;
+			chart.height = chart.height * scaleFactor;
+			var context = chart.getContext("2d");
+		}
+		var n = 4;
+		for (var i = 0; i < n; i++) {
+			Things[i]
+		}
+		</script>
+	</body>
+</html>
