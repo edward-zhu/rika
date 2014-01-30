@@ -17,7 +17,7 @@ function loadQuestions(callback) {
 	});
 }
 
-function loadSingleQuestion(question, total) {
+function loadSingleQuestion(question, total, callback) {
 	var data = question;
 	data.total = total;
 	$.get('/partials/question_single.html',{}, function (html) {
@@ -60,10 +60,11 @@ function loadSingleQuestion(question, total) {
 				}
 			}
 		});
+		callback();
 	});
 }
 
-function loadMultipleQuestion(question, total) {
+function loadMultipleQuestion(question, total, callback) {
 	var data = question;
 	data.total = total;
 	$.get('/partials/question_multiple.html',{}, function (html) {
@@ -107,10 +108,11 @@ function loadMultipleQuestion(question, total) {
 				}
 			}
 		});
+		callback();
 	});
 }
 
-function loadTextQuestion(question, total)
+function loadTextQuestion(question, total, callback)
 {
 	var data = question;
 	data.total = total;
@@ -139,6 +141,7 @@ function loadTextQuestion(question, total)
 				});
 			}
 		});
+		callback();
 	});
 }
 
@@ -154,14 +157,18 @@ function loadQuestion(id) {
 		finish();
 		return;
 	}
+	var callback = function () {
+		$("#question_form").removeClass("loading");
+	}
+	$("#question_form").addClass("loading");
 	if (question.type === 'single') {
-		loadSingleQuestion(question, total);
+		loadSingleQuestion(question, total, callback);
 	} 
 	else if (question.type === 'multiple') {
-		loadMultipleQuestion(question, total);
+		loadMultipleQuestion(question, total, callback);
 	}
 	else if (question.type === 'text') {
-		loadTextQuestion(question, total);
+		loadTextQuestion(question, total, callback);
 	}
 }
 
