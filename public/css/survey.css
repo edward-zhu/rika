@@ -86,3 +86,42 @@
 	margin-top : 0.25em;
 	padding-top : 0.25em;
 }
+
+#stats_list {
+	padding-left : 1em;
+	padding-right : 1em;
+	min-height : 10em;
+}
+
+#stats_list .item {
+	margin-bottom : 1em;
+	margin-top : 1em;
+} 
+
+.bar {
+	/* margin : 0.1em;*/
+	width : 80%;
+	height : 0.875em;
+	background-color : #f70;
+	box-shadow : 1.5px 1px 1px 1px #CCC;
+	float : left;
+	border-radius: 3px;
+}
+
+#value {
+	font-size: 0.75em;
+	margin-left : 0.3em;
+}
+#page_menu {
+	font-size: 1em;
+	width : auto;
+	height:1.85em;
+}
+
+#page_menu .item {
+	float:left;
+	margin : 0;
+	padding: 0.5em;
+	height:100%;
+	vertical-align: center;
+}

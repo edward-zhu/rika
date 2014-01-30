@@ -5,10 +5,13 @@ responseSchema = new mongoose.Schema
 		type: Number,
 		ref: 'Survey'
 	}
-	taker_token : String 
-	answers : [{
-		answer_id	: mongoose.Schema.Types.ObjectId,
-		answer		: String
-	}]
+	taker_token 	: String 
+	question_id		: mongoose.Schema.Types.ObjectId
+	answers : [
+		{
+			answer_id	: mongoose.Schema.Types.ObjectId,
+			answer		: String
+		}
+	]
 
 module.exports = mongoose.model('Response', responseSchema)

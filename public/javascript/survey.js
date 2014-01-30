@@ -45,7 +45,8 @@ function loadSingleQuestion(question, total) {
 					data : {
 						taker_token	: taker_token,
 						survey_id 	: $("#survey_id").val(),
-						answers		: answers
+						answers		: answers,
+						question_id	: question._id
 					},
 					type : 'POST'
 				}).done(function (data) {
@@ -91,7 +92,8 @@ function loadMultipleQuestion(question, total) {
 					data : {
 						taker_token	: taker_token,
 						survey_id 	: $("#survey_id").val(),
-						answers		: answers
+						answers		: answers,
+						question_id	: question._id
 					},
 					type : 'POST'
 				}).done(function (data) {
@@ -127,7 +129,8 @@ function loadTextQuestion(question, total)
 					data : {
 						taker_token	: taker_token,
 						survey_id 	: $("#survey_id").val(),
-						answers		: answers
+						answers		: answers,
+						question_id	: question._id
 					},
 					type : 'POST'
 				}).done(function (data) {

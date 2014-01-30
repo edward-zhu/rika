@@ -1,0 +1,20 @@
+<div class="item">
+	<div class="content">
+		<div class="header">#{{ id }}</div>
+		{{ question }}
+	</div>
+	<table class="ui compact table segment">
+	  <thead>
+	    <tr><th class="four wide">答案</th>
+	    <th>调查结果</th>
+	  </tr></thead>
+	  <tbody>
+			{{#answers}}
+	    <tr>
+	      <td>{{ answer }}</td>
+	      <td><div class="bar" id="{{ id }}"></div><span id="value">{{ percent }}% ( {{ value }} / {{ answer_count }} )</span></td>
+	    </tr>
+			{{/answers}}
+	  </tbody>
+	</table>
+</div>

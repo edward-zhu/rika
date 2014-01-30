@@ -23,6 +23,7 @@ if 'development' == app.get('env')
 	app.use express.errorHandler()
 
 mongoose.connect("mongodb://edward:mtmtmt@troup.mongohq.com:10018/survey")
+#mongoose.connect("mongodb://localhost/survey")
 
 require './models/Survey'
 require './models/Response'
@@ -45,11 +46,13 @@ app.get		'/survey/:id/',	survey.get
 app.get		'/survey/',	survey.get
 app.post	'/survey/', survey.create
 app.put		'/survey/:id/', survey.modify
+app.get		'/survey/:id/stats', survey.getStats
 app.post	'/question/', question.create
 app.delete	'/question/', question.delete
 app.post	'/response', response.create
 
 app.get		'/getanswer',  answer.getAnswers
+app.get		'/gettextans', answer.getTextAnswers
 		
 app.listen process.env.PORT || 3000
 console.log "server running at port 3000."

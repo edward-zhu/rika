@@ -5,6 +5,7 @@ exports.create = (req, res) ->
 	response = new Response({
 		survey 		: req.body.survey_id,
 		taker_token	: req.body.taker_token,
+		question_id	: req.body.question_id,
 		answers		: req.body.answers
 	})
 	response.save (err, resp) ->

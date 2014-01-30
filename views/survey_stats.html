@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}{% parent %} - {{survey.title}} 调查数据{% endblock %}
+
+{% block head %}
+	
+	<link rel="stylesheet" href="/css/survey.css" type="text/css" charset="utf-8">
+	{% parent %}
+{% endblock %}
+
+{% block content %}
+	<div class="ten wide column">
+		<h2 class="ui header">
+			{{ survey.title }}
+			<div class="sub header">调查数据</div>
+		</h2>
+		<div class="ui raised segment">
+			<div class="ui active inverted dimmer" id="loader">
+				<div class="ui large text loader">Loading</div>
+			</div>
+			<div class="ui list" id="stats_list">
+				
+			</div>
+			
+		</div>
+		
+		<input type="hidden" id="survey_id" value="{{ survey._id }}">
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script src="/javascript/mustache.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/javascript/survey_stats.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}

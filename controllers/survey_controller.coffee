@@ -1,8 +1,7 @@
 mongoose = require 'mongoose'
+Survey = mongoose.model('Survey')
 
 exports.get = (req, res) ->
-	Survey = mongoose.model('Survey')
-	
 	if req.params.id?
 		Survey.findById req.params.id, (err, survey) ->
 			res.send(500, {error: err}) if err?
@@ -20,7 +19,6 @@ exports.new = (req, res) ->
 	
 exports.create = (req, res) ->
 	console.log('Creating...')
-	Survey = mongoose.model('Survey')
 	if req.param('title')?
 		survey = new Survey({
 			title: req.param('title')
@@ -44,7 +42,6 @@ exports.edit = (req, res) ->
 	res.render('survey_edit', {id : req.params.id})
 	
 exports.modify = (req, res) ->
-	Survey = mongoose.model('Survey')
 	if req.body.modify_type == 'order'
 		for question, i in req.body.questions
 			console.log(req.params.id)
@@ -77,3 +74,11 @@ exports.modify = (req, res) ->
 		err : 1,
 		msg : "404"
 	})
+	
+exports.getStats = (req, res) ->
+	Survey.findById req.params.id, 'title', (err, survey) ->
+		res.send({
+			err : 1,
+			msg : err.msg
+		}) if err?
+		res.render('survey_stats', { survey : survey })
