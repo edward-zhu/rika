@@ -54,6 +54,9 @@ function loadSingleQuestion(question, total, callback) {
 				]
 				var pos = getPos(answer_id, question.answers);
 				var next = question.id + 1;
+				if (question.next) {
+					next = question.next;
+				}
 				if (question.answers[pos].next) {
 					next = question.answers[pos].next;
 				}
@@ -105,6 +108,10 @@ function loadMultipleQuestion(question, total, callback) {
 					}
 				});
 				console.log(answers);
+				var next = question.id + 1;
+				if (question.next) {
+					next = question.next;
+				}
 				$.ajax('/response',{
 					data : {
 						taker_token	: taker_token,
@@ -115,7 +122,7 @@ function loadMultipleQuestion(question, total, callback) {
 					type : 'POST'
 				}).done(function (data) {
 					// console.log(data);
-					loadQuestion(question.id + 1);
+					loadQuestion(next);
 				});
 			},
 			rules : {
@@ -143,6 +150,10 @@ function loadTextQuestion(question, total, callback)
 					answer		: $("#answer").val()
 				}];
 				console.log(answers);
+				var next = question.id + 1;
+				if (question.next) {
+					next = question.next;
+				}
 				$.ajax('/response',{
 					data : {
 						taker_token	: taker_token,
@@ -153,7 +164,7 @@ function loadTextQuestion(question, total, callback)
 					type : 'POST'
 				}).done(function (data) {
 					// console.log(data);
-					loadQuestion(question.id + 1);
+					loadQuestion(next);
 				});
 			}
 		});

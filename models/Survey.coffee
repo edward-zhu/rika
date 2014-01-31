@@ -27,6 +27,7 @@ surveySchema = new mongoose.Schema
 			answer	: String,
 			next	: Number 
 		} ]
+		next		: Number
 	} ]
 
 surveySchema.index({_id : 1, "questions.id" : 1})

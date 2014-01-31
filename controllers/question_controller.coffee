@@ -67,10 +67,20 @@ exports.create = (req, res) ->
 			})
 		question = {
 			id			: count + 1,
-			question	: req.param('question_name'),
 			type		: req.param('question_type')
 			
-		}
+		}	
+		name = req.param('question_name')
+		re = RegExp("\\[\\d+\\]$")
+		if name.match(re)?
+			result = name.match(re)
+			index = result.index
+			result = result[0]
+			question.question = name.substr(0, index)
+			question.next = parseInt(result.substr(1, result.length - 2))
+		else
+			question.question = name
+		
 		if question.type != 'text'
 			question.answers  = genAnswers(req.param('question_answers')) 
 		Survey.findOneAndUpdate(
