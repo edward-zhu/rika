@@ -46,6 +46,7 @@ function loadSingleQuestion(question, total, callback) {
 			}
 		},{
 			onSuccess: function () {
+				$("#question_form").addClass("loading");
 				var answer_id = $("input:checked").val();
 				var answers = [
 					{
@@ -101,6 +102,7 @@ function loadMultipleQuestion(question, total, callback) {
 			}
 		},{
 			onSuccess: function () {
+				$("#question_form").addClass("loading");
 				var answers = [];
 				$("input:checked").each(function (i, answer) {
 					answers[i] = {
@@ -145,6 +147,7 @@ function loadTextQuestion(question, total, callback)
 
 		},{
 			onSuccess: function () {
+				$("#question_form").addClass("loading");
 				var answers = [{
 					answer_id	: question._id,
 					answer		: $("#answer").val()
@@ -174,6 +177,7 @@ function loadTextQuestion(question, total, callback)
 
 function finish() {
 	$("#question_form").load('/partials/question_finish.html');
+	$("#question_form").removeClass("loading");
 }
 
 
@@ -181,13 +185,14 @@ function loadQuestion(id) {
 	var question = questions[id - 1];
 	var total = questions.length;
 	if (id > total) {
+		
 		finish();
 		return;
 	}
 	var callback = function () {
 		$("#question_form").removeClass("loading");
 	}
-	$("#question_form").addClass("loading");
+	
 	if (question.type === 'single') {
 		loadSingleQuestion(question, total, callback);
 	} 
