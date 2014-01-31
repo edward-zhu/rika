@@ -17,10 +17,10 @@ function genTextAns(question, page, first_time) {
 		data._id = question._id;
 		data.id = question.id;
 		data.question = question.question;
-		if (data.page === 1) {
+		if (data.page === 1 || data.total === 0) {
 			data.first_page = true;
 		}
-		if (data.page === data.total) {
+		if (data.page === data.total || data.total === 0) {
 			data.last_page = true;
 		}
 		var h = $.parseHTML(Mustache.render(html_for_textans, data));

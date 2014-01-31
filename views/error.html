@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}{% parent %} - 主页{% endblock %}
+
+{% block head %}
+	{% parent %}
+{% endblock %}
+
+{% block content %}
+<h2 class="ui header">
+	出错了
+	<div class="sub header">There's something wrong. </div>
+</h2>
+<div class="sixteen wide column">
+	<div class="ui segment">
+		<h4 class="ui header">{{ error }}</h4>
+	</div>
+</div>
+{% endblock %}
+	

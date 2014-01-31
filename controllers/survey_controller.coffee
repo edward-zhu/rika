@@ -1,34 +1,45 @@
 mongoose = require 'mongoose'
 Survey = mongoose.model('Survey')
 
+error = require '../helpers/err'
+
 exports.get = (req, res) ->
 	if req.params.id?
-		Survey.findById req.params.id, (err, survey) ->
-			res.send(500, {error: err}) if err?
-			res.format 
-				'text/html' : ->
-					console.log(survey.questions)
-					res.render('survey', {survey : survey})
-				'application/json' : ->
-					res.send(survey)
+		Survey
+			.findById(req.params.id)
+			.exec((err, survey) ->
+				if err? or not survey?
+					error(res, "找不到该问卷")
+				else
+					res.format 
+						'text/html' : ->
+							console.log(survey.questions)
+							res.render('survey', {survey : survey})
+						'application/json' : ->
+							res.send(survey)
+			)
 	else
-		res.send({'err', '0'})
+		error(res, "找不到网页")
 		
 exports.new = (req, res) ->
-	res.render('survey_new')
+	if req.session.user?
+		res.render('survey_new')
+	else
+		req.flash('info','请登录后进行操作。')
+		res.redirect '/login'
 	
 exports.create = (req, res) ->
 	console.log('Creating...')
 	if req.param('title')?
 		survey = new Survey({
-			title: req.param('title')
+			title : req.param('title'),
+			user  : req.session.user
 		})
 		idgen = require('../models/IDGen')
 		idgen.getNewID 'Survey', (id) ->
-			console.log('get ID : ' + id.toString())
+			# console.log('get ID : ' + id.toString())
 			survey._id = id;
-			survey.genOwnerToken req.param('email'), req.param('pass')
-			console.log(survey)
+			# console.log(survey)
 			survey.save (err) ->
 				if err
 					console.log(err)
@@ -36,16 +47,24 @@ exports.create = (req, res) ->
 				else
 					res.send({'err' : 0, 'msg' : 'Success!', 'id' : survey._id})
 	else
-		res.send({'err' : 1, 'msg' : "Empty Title"})
+		error(res, "调查名为空。")
 		
 exports.edit = (req, res) ->
-	res.render('survey_edit', {id : req.params.id})
+	if not req.params.id?
+		error(res, '未提供id')
+	else
+		Survey.findById req.params.id, 'user', (err, survey) ->
+			if err? or not survey? or survey.user != req.session.user
+				req.flash('info',"您没有编辑的权限，请以该问卷管理者身份登录以进行操作")
+				res.redirect '/login'
+			else
+				res.render('survey_edit', {id : req.params.id})
 	
 exports.modify = (req, res) ->
 	if req.body.modify_type == 'order'
 		for question, i in req.body.questions
-			console.log(req.params.id)
-			console.log(question + ' ' + i.toString())
+			# console.log(req.params.id)
+			# console.log(question + ' ' + i.toString())
 			Survey.findOneAndUpdate(
 				{
 					_id : req.params.id,
@@ -70,15 +89,34 @@ exports.modify = (req, res) ->
 			err : 0,
 			msg : "操作成功！"
 		})
-	res.send({
-		err : 1,
-		msg : "404"
-	})
+	error(res, "找不到网页")
 	
 exports.getStats = (req, res) ->
 	Survey.findById req.params.id, 'title', (err, survey) ->
-		res.send({
-			err : 1,
-			msg : err.msg
-		}) if err?
-		res.render('survey_stats', { survey : survey })
+		if err? or not survey?
+			error(res, err.msg) if err?
+			error(res, "找不到该调查。") if not survey?
+		else
+			res.render('survey_stats', { survey : survey })
+			
+exports.getUserSurveys = (req, res) ->
+	if not req.session.user?
+		req.flash('info', '请先登录')
+		res.redirect '/login'
+	else
+		user = req.session.user
+		Survey
+			.find({user : user})
+			.select('title date')
+			.sort('-date')
+			.exec((err, surveys) ->
+				if err?
+					error(res, err.msg)
+				else
+					for survey in surveys
+						# console.log(survey.date)
+						survey.date_str = survey.date.toString()
+					res.render('survey_my', {
+						surveys : surveys
+					})
+			)

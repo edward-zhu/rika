@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}{% parent %} - 登录{% endblock %}
+
+{% block head %}
+	{% parent %}
+	<link rel="stylesheet" href="/css/login.css" type="text/css" charset="utf-8">
+	
+{% endblock %}
+
+{% block content %}
+	<div class="twelve wide column">
+		<h2 class="ui header">
+			注册
+			<div class="sub header">Sign up</div>
+		</h2>
+		<div class="ui raised segment">
+			<div class="ui form">
+				<div class="ui error message" id="msg">
+				</div>	
+		    <div class="field">
+		      <label>邮箱</label>
+		      <input placeholder="输入邮箱" type="text" id="email">
+		    </div>
+		    <div class="two fields">
+					<div class="field">
+			      <label>密码</label>
+			      <input placeholder="输入密码" type="password" id="pass">
+					</div>
+					<div class="field">
+			      <label>确认密码</label>
+			      <input placeholder="再输入一次密码" type="password" id="repass">
+					</div>
+		    </div>
+				<div class="ui blue submit button">注册</div>
+			</div>
+		</div>
+		
+		
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script src="/javascript/signup.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}{% parent %} - 登录{% endblock %}
+
+{% block head %}
+	{% parent %}
+	<link rel="stylesheet" href="/css/login.css" type="text/css" charset="utf-8">
+	
+{% endblock %}
+
+{% block content %}
+	<div class="sixteen wide column">
+		<h2 class="ui header">
+			登录
+			<div class="sub header">Sign in</div>
+		</h2>
+		{% if message != "" %}
+		<div class="ui info message">
+			{{ message }}
+		</div>
+		{% endif %}
+		<div class="ui grid">
+			<div class="six wide column">
+				<div class="ui raised segment">
+					<div class="ui form">
+						<div class="ui error message" id="msg">
+						</div>	
+				    <div class="field">
+				      <label>邮箱</label>
+				      <input placeholder="输入邮箱" type="text" id="email">
+				    </div>
+				    <div class="field">
+				      <label>密码</label>
+				      <input placeholder="输入密码" type="password" id="pass">
+				    </div>
+						<div class="ui green submit button">登录</div>
+					</div>
+			</div>
+		</div>
+		
+		
+		
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script src="/javascript/login.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}

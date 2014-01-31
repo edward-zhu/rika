@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}{% parent %} - 我的调查{% endblock %}
+
+{% block head %}
+	{% parent %}
+	<link rel="stylesheet" href="/css/survey_my.css" type="text/css" charset="utf-8">
+	
+{% endblock %}
+
+{% block content %}
+	<div class="twelve wide column">
+		<h2 class="ui header">
+			我的调查
+			<div class="sub header">My Survey</div>
+		</h2>
+		<div class="ui raised segment" id="surveys">
+			<div class="ui items">
+				{% for survey in surveys %}
+				<a class="item" id="survey" href="/survey/{{ survey.id }}/edit">
+					<div class="content">
+						<div class="meta" id="date">{{ survey.date_str }}</div>
+						<div class="name">{{ survey.title }}</div>
+					</div>
+				</a>
+				{% endfor %}
+			</div>
+		</div>
+		
+		
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script src="/javascript/moment-with-langs.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+	moment.lang("zh-CN");
+	$(".meta#date").each(function () {
+		$(this).html(moment($(this).html()).fromNow());
+	});
+	</script>
+{% endblock %}

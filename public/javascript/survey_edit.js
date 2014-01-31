@@ -65,7 +65,13 @@ function getQuestions() {
 	});
 }
 
-getQuestions();
+$(document).ready(function () {
+	getQuestions();
+	$("#copy").zclip({
+		path: '/javascript/ZeroClipboard.swf',
+		copy: $("#survey-url").val()
+	});
+})
 
 
 $('.ui.dropdown').dropdown({

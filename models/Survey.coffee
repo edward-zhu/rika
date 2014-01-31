@@ -14,6 +14,7 @@ surveySchema = new mongoose.Schema
 		type : Date,
 		default : Date.now
 	}
+	user		: String
 	owner_token : String
 	questions	: [ {
 		id			: Number,
@@ -36,4 +37,12 @@ surveySchema.methods.genOwnerToken = (email, pass)->
 	sha1.update(email + 'rika' + pass)
 	@owner_token = sha1.digest('hex')
 
-module.exports = mongoose.model('Survey', surveySchema)
+Survey = mongoose.model('Survey', surveySchema)
+
+Survey.getOwnerToken = (email, pass) ->
+	crypto = require 'crypto'
+	sha1 = crypto.createHash('sha1')
+	sha1.update(email + 'rika' + pass)
+	sha1.digest('hex')
+
+module.exports = Survey

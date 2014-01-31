@@ -14,7 +14,18 @@
 			问卷设计
 			<div class="sub header">编辑问卷内容</div>
 		</h2>
-		
+		<div class="ui basic segment" id="toolbelt">
+			
+			<a class="ui tiny labeled green button" href="#add_q">
+				<i class="add icon"></i>
+				新建问题
+			</a>
+			<a class="ui tiny labeled button" href="#add_q">
+				<i class="share icon"></i>
+				调查地址
+			</a>
+			
+		</div>
 		<div id="question_table">
 			<table class="ui table segment">
 			<thead>
@@ -34,7 +45,9 @@
 		</table>
 		</div>
 		<div class="ui grid">
+			<a name='add_q' id="add_q"></a>
 			<div class="ten wide column">
+				
 				<div class="ui segment">
 					<h3 class="ui header">新建问题</h3>
 					<div class="ui form">
@@ -68,11 +81,17 @@
 			</div>
 			<div class="six wide column">
 				<div class="ui raised segment">
+					<div class="ui fluid action small input">
+					  <input type="text" value="http://rikachan.herokuapp.com/survey/{{ id }}/" id="survey-url">
+					  <div class="ui teal right small icon button" id="copy"><i class="copy icon"></i></div>
+					</div>
+				</div>
+				<div class="ui raised segment">
 					<h3 clcass="ui header">更改问题顺序</h3>
 					<p><i class="info icon"></i>请先将表格中的问题拖动至正确顺序，然后按下面的按钮确认更改。</p>
 					<div class="ui blue button" id="changeOrder">更改顺序</div>
 				</div>
-				<div class="ui raised segment">
+				<!-- <div class="ui raised segment">
 					<h3 clcass="ui header">分支跳转</h3>
 					<p>
 						<i class="info icon"></i>
@@ -82,7 +101,7 @@
 						<div class="ui segment"><b>"是[1] 否[2]"</b></div>
 						当填写人选择“是”即会调至问题1，选择“否”则会调至问题2。
 					</p>
-				</div>
+				</div> -->
 				
 			</div>
 		</div>
@@ -95,4 +114,5 @@
 	<script src="/javascript/mustache.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/javascript/survey_edit.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/javascript/jquery.sortable.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/javascript/jquery.zclip.min.js" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
