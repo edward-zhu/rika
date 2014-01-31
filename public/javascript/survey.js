@@ -33,6 +33,7 @@ function loadSingleQuestion(question, total, callback) {
 	
 	$.get('/partials/question_single.html',{}, function (html) {
 		$("#question_form").html(Mustache.render(html, data));
+		callback();
 		$(".ui.checkbox").checkbox();
 		$(".ui.form").form({
 			checkbox : {
@@ -71,7 +72,7 @@ function loadSingleQuestion(question, total, callback) {
 					type : 'POST'
 				}).done(function (data) {
 					console.log(next);
-					callback();
+					
 					loadQuestion(next);
 				});
 			},
@@ -90,6 +91,7 @@ function loadMultipleQuestion(question, total, callback) {
 	data.total = total;
 	$.get('/partials/question_multiple.html',{}, function (html) {
 		$("#question_form").html(Mustache.render(html, data));
+		callback();
 		$(".ui.checkbox").checkbox();
 		$(".ui.form").form({
 			checkbox : {
@@ -125,7 +127,7 @@ function loadMultipleQuestion(question, total, callback) {
 					type : 'POST'
 				}).done(function (data) {
 					// console.log(data);
-					callback();
+					
 					loadQuestion(next);
 				});
 			},
@@ -145,6 +147,7 @@ function loadTextQuestion(question, total, callback)
 	data.total = total;
 	$.get('/partials/question_text.html',{}, function (html) {
 		$("#question_form").html(Mustache.render(html, data));
+		callback();
 		$(".ui.form").form({
 
 		},{
@@ -169,7 +172,7 @@ function loadTextQuestion(question, total, callback)
 					type : 'POST'
 				}).done(function (data) {
 					// console.log(data);
-					callback();
+					
 					loadQuestion(next);
 				});
 			}
