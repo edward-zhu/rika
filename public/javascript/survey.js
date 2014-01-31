@@ -218,6 +218,7 @@ $(document).ready(function () {
 		questions = data;
 		// console.log(questions);
 		$("#go").removeClass("disabled");
+		$("#go").html("<i class='ui play icon'></i>开始");
 	});
 	taker_token = CryptoJS.SHA1(Date() + $("#survey_id").val() + Math.random().toString()).toString();
 });
