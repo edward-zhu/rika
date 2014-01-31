@@ -17,9 +17,20 @@ function loadQuestions(callback) {
 	});
 }
 
+function getPos(id, answers) {
+	for (var i = 0; i < answers.length; i++) {
+		if (answers[i]._id == id) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 function loadSingleQuestion(question, total, callback) {
 	var data = question;
 	data.total = total;
+	
+	
 	$.get('/partials/question_single.html',{}, function (html) {
 		$("#question_form").html(Mustache.render(html, data));
 		$(".ui.checkbox").checkbox();
@@ -41,6 +52,11 @@ function loadSingleQuestion(question, total, callback) {
 						answer_id : answer_id
 					}
 				]
+				var pos = getPos(answer_id, question.answers);
+				var next = question.id + 1;
+				if (question.answers[pos].next) {
+					next = question.answers[pos].next;
+				}
 				$.ajax('/response',{
 					data : {
 						taker_token	: taker_token,
@@ -50,8 +66,8 @@ function loadSingleQuestion(question, total, callback) {
 					},
 					type : 'POST'
 				}).done(function (data) {
-					console.log(question.id + 1);
-					loadQuestion(question.id + 1);
+					console.log(next);
+					loadQuestion(next);
 				});
 			},
 			rules : {

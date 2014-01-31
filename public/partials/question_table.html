@@ -18,7 +18,7 @@
 			<td>{{type}}</td>
 			<td>
 				{{#answers}}
-				<span data-value="{{ _id }}" id="{{ _id }}">{{ answer }}</span>
+				<span data-value="{{ _id }}" id="{{ _id }}">{{ answer }}<strong>{{#next}}[->#{{next}}]{{/next}}</strong></span>
 				{{/answers}}
 			</td>
 			<td>

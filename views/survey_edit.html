@@ -47,7 +47,12 @@
 		<div class="ui grid">
 			<a name='add_q' id="add_q"></a>
 			<div class="ten wide column">
-				
+				<div class="ui raised segment">
+					<div class="ui fluid action small input">
+					  <input type="text" value="http://rikachan.herokuapp.com/survey/{{ id }}/" id="survey-url">
+					  <div class="ui teal right small icon button" id="copy"><i class="copy icon"></i></div>
+					</div>
+				</div>
 				<div class="ui segment">
 					<h3 class="ui header">新建问题</h3>
 					<div class="ui form">
@@ -81,27 +86,21 @@
 			</div>
 			<div class="six wide column">
 				<div class="ui raised segment">
-					<div class="ui fluid action small input">
-					  <input type="text" value="http://rikachan.herokuapp.com/survey/{{ id }}/" id="survey-url">
-					  <div class="ui teal right small icon button" id="copy"><i class="copy icon"></i></div>
-					</div>
-				</div>
-				<div class="ui raised segment">
 					<h3 clcass="ui header">更改问题顺序</h3>
 					<p><i class="info icon"></i>请先将表格中的问题拖动至正确顺序，然后按下面的按钮确认更改。</p>
 					<div class="ui blue button" id="changeOrder">更改顺序</div>
 				</div>
-				<!-- <div class="ui raised segment">
+				<div class="ui raised segment">
 					<h3 clcass="ui header">分支跳转</h3>
 					<p>
 						<i class="info icon"></i>
-						您可以在单项选择类型的问题中加入符号
+						您可以在<strong>单项选择</strong>类型的问题中加入符号
 						<div class="ui segment"><b>"答案[目标问题编号]"</b></div>
 						例如:
 						<div class="ui segment"><b>"是[1] 否[2]"</b></div>
 						当填写人选择“是”即会调至问题1，选择“否”则会调至问题2。
 					</p>
-				</div> -->
+				</div>
 				
 			</div>
 		</div>
