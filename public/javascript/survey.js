@@ -71,6 +71,7 @@ function loadSingleQuestion(question, total, callback) {
 					type : 'POST'
 				}).done(function (data) {
 					console.log(next);
+					callback();
 					loadQuestion(next);
 				});
 			},
@@ -80,7 +81,7 @@ function loadSingleQuestion(question, total, callback) {
 				}
 			}
 		});
-		callback();
+		
 	});
 }
 
@@ -124,6 +125,7 @@ function loadMultipleQuestion(question, total, callback) {
 					type : 'POST'
 				}).done(function (data) {
 					// console.log(data);
+					callback();
 					loadQuestion(next);
 				});
 			},
@@ -133,7 +135,7 @@ function loadMultipleQuestion(question, total, callback) {
 				}
 			}
 		});
-		callback();
+		
 	});
 }
 
@@ -167,11 +169,12 @@ function loadTextQuestion(question, total, callback)
 					type : 'POST'
 				}).done(function (data) {
 					// console.log(data);
+					callback();
 					loadQuestion(next);
 				});
 			}
 		});
-		callback();
+		
 	});
 }
 
@@ -191,6 +194,7 @@ function loadQuestion(id) {
 	}
 	var callback = function () {
 		$("#question_form").removeClass("loading");
+		
 	}
 	
 	if (question.type === 'single') {
