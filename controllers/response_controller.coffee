@@ -44,7 +44,7 @@ exports.trimResp = (req, res) ->
 	async.series [
 		(callback) ->
 			Token
-				.find({state : /used/, survey : survey_id, date : {$lte : new Date(Date.now() - 20000)}})
+				.find({state : /used/, survey : survey_id, date : {$lte : new Date(Date.now() - 600000)}})
 				.exec((err, results) ->
 					if err?
 						callback(err)
