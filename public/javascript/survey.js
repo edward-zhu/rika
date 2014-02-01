@@ -205,22 +205,20 @@ function loadUI(callback) {
 	});
 }
 
-$(document).ready(function () {
-	$("#go").addClass("disabled");
-	$("#go").html("<i class='ui play icon'></i>加载UI..");
-	loadUI(function () {
-		$("#go").html("<i class='ui play icon'></i>加载调查内容..");
-		loadQuestions(function (data) {
-			questions = data;
-			$("#go").removeClass("disabled");
-			$("#go").html("<i class='ui play icon'></i>开始");
-			window.onbeforeunload = function()
-			{
-			    return "您还没有填完问卷，如果您现在离开您的选择都将不被保存，真的要离开吗？";
-			}
-		});
-		taker_token = CryptoJS.SHA1(Date() + $("#survey_id").val() + Math.random().toString()).toString();
+$("#go").addClass("disabled");
+$("#go").html("<i class='ui play icon'></i>加载UI..");
+loadUI(function () {
+	$("#go").html("<i class='ui play icon'></i>加载调查内容..");
+	loadQuestions(function (data) {
+		questions = data;
+		$("#go").removeClass("disabled");
+		$("#go").html("<i class='ui play icon'></i>开始");
+		window.onbeforeunload = function()
+		{
+		    return "您还没有填完问卷，如果您现在离开您的选择都将不被保存，真的要离开吗？";
+		}
 	});
+	taker_token = CryptoJS.SHA1(Date() + $("#survey_id").val() + Math.random().toString()).toString();
 });
 
 
