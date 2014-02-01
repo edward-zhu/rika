@@ -162,8 +162,9 @@ function finish() {
 		state : "finished"
 	},function(data) {
 		console.log(data)
-		$("#question_form").load('/partials/question_finish.html');
-		$("#question_form").removeClass("loading");
+		$("#question_form").load('/partials/question_finish.html', function () {
+			$("#question_form").removeClass("loading");
+		});
 	})
 }
 
