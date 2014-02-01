@@ -6,14 +6,13 @@ Token = mongoose.model('Token')
 
 exports.create = (req, res) ->
 	Response
-		.count({question_id : req.body.question_id, taker_token : req.body.taker_token})
-		.exec((err, count) ->
+		.count({question_id : req.body.question_id, taker_token : req.session.token}, (err, count) ->
 			if err?
 				res.send({
 					err : 1,
 					msg	: err.msg
 				})
-			else if count == 0 or not count?
+			else if count == 0
 				response = new Response({
 					survey 		: req.body.survey_id,
 					taker_token	: req.session.token,

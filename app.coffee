@@ -11,12 +11,7 @@ app = express()
 
 app.engine('html', swig.renderFile)
 
-mongoose.connect(
-		"mongodb://admin:uV-gTgBmpwvp@" + 
-		process.env.OPENSHIFT_MONGODB_DB_HOST + ":" + 
-		process.env.OPENSHIFT_MONGODB_DB_PORT + "/akiba"
-)
-#mongoose.connect("mongodb://edward:mtmtmt@troup.mongohq.com:10018/survey")
+mongoose.connect("mongodb://edward:mtmtmt@troup.mongohq.com:10018/survey")
 #mongoose.connect("mongodb://localhost/survey")
 
 app.configure ->
