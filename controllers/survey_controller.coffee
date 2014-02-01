@@ -1,5 +1,6 @@
 mongoose = require 'mongoose'
 Survey = mongoose.model('Survey')
+Token = mongoose.model('Token')
 
 error = require '../helpers/err'
 
@@ -13,7 +14,18 @@ exports.get = (req, res) ->
 				else
 					res.format 
 						'text/html' : ->
-							console.log(survey.questions)
+							console.log(req.session.survey_id)
+							console.log(req.session.token)
+							if not req.session.token? or req.session.survey_id != req.params.id
+								crypto = require 'crypto'
+								sha1 = crypto.createHash('sha1')
+								sha1.update(Date() + req.params.id + Math.random().toString())
+								req.session.survey_id = req.params.id
+								token = sha1.digest('hex')
+								req.session.token = token
+								Token
+									.update({token : token}, {$set : {state : "used"}},{upsert : true})
+									.exec()
 							res.render('survey', {survey : survey})
 						'application/json' : ->
 							res.send(survey)

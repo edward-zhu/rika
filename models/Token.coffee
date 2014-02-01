@@ -1,9 +1,12 @@
 mongoose = require 'mongoose'
 crypto = require 'crypto'
-states = "unused used".split(' ')
+states = "unused used finished".split(' ')
 
 tokenSchema = new mongoose.Schema
-	token	: String
+	token	: {
+		type	: String,
+		unique 	: true
+	}
 	state	: {
 		type 	: String,
 		enum	: states
@@ -12,5 +15,7 @@ tokenSchema = new mongoose.Schema
 		type	: Number,
 		ref		: 'Survey'
 	}
+
+tokenSchema.index({token : 1, survey : 1})
 
 module.exports = mongoose.model('Token', tokenSchema)

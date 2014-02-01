@@ -41,6 +41,7 @@ if 'development' == app.get('env')
 require './models/User'
 require './models/Survey'
 require './models/Response'
+require './models/Token'
 
 survey = require './controllers/survey_controller'
 response = require './controllers/response_controller'
@@ -48,6 +49,7 @@ question = require './controllers/question_controller'
 answer = require './controllers/answer_controller'
 login = require './controllers/login_controller'
 user = require './controllers/user_controller'
+token = require './controllers/token_controller'
 
 	
 app.get '/',
@@ -73,6 +75,7 @@ app.get		'/login'				,	login.get
 app.get		'/my'					,	survey.getUserSurveys
 app.get		'/signup'				,	user.new
 app.post	'/signup'				,	user.create
+app.post	'/token'				,	token.upsert
 		
 app.listen process.env.PORT || 3000
 console.log "server running at port 3000."

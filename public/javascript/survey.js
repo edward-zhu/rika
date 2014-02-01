@@ -160,8 +160,14 @@ function loadTextQuestion(question, total, callback) {
 
 function finish() {
 	window.onbeforeunload = function () {};
-	$("#question_form").load('/partials/question_finish.html');
-	$("#question_form").removeClass("loading");
+	$.post('/token',{
+		survey_id : $("#survey_id").val(),
+		state : "finished"
+	},function(data) {
+		console.log(data)
+		$("#question_form").load('/partials/question_finish.html');
+		$("#question_form").removeClass("loading");
+	})
 }
 
 
