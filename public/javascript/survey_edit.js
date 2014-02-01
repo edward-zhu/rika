@@ -19,7 +19,7 @@ function modifyOrder() {
 		type	: 'PUT',
 		data	: post_data
 	}).done(function (data) {
-		console.log(data);
+		//console.log(data);
 	});
 }
 
@@ -56,7 +56,7 @@ function getQuestions() {
 						survey_id	: survey_id
 					}
 				}).done(function (data){
-					console.log(data);
+					// console.log(data);
 					row.remove();
 					modifyOrder();
 				})

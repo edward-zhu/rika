@@ -65,7 +65,6 @@ function loadSingleQuestion(question, total, callback) {
 			}
 			$.ajax('/response',{
 				data : {
-					taker_token	: taker_token,
 					survey_id 	: $("#survey_id").val(),
 					answers		: answers,
 					question_id	: question._id
@@ -107,7 +106,6 @@ function loadMultipleQuestion(question, total, callback) {
 			}
 			$.ajax('/response',{
 				data : {
-					taker_token	: taker_token,
 					survey_id 	: $("#survey_id").val(),
 					answers		: answers,
 					question_id	: question._id
@@ -145,7 +143,6 @@ function loadTextQuestion(question, total, callback) {
 			}
 			$.ajax('/response',{
 				data : {
-					taker_token	: taker_token,
 					survey_id 	: $("#survey_id").val(),
 					answers		: answers,
 					question_id	: question._id
@@ -210,7 +207,7 @@ function loadUI(callback) {
 $(document).ready(function () {
 	window.onbeforeunload = function()
 	{
-	    return "您还没有填完问卷，如果您现在离开将会对数据统计造成麻烦，真的要离开吗？";
+	    return "您还没有填完问卷，如果您现在离开您的选择都将不被保存，真的要离开吗？";
 	}
 	
 	$("#go").addClass("disabled");

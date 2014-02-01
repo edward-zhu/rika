@@ -3,12 +3,12 @@ async = require 'async'
 
 Survey = mongoose.model('Survey')
 Response = mongoose.model('Response')
+Token = mongoose.model('Token')
 
-	
-# genQuestions = 
-
-genStats = (questions, callback) ->
+genStats = (survey_id, questions, callback) ->
 	data = []
+	tokens =[]
+
 	async.eachLimit questions, 3, (question, callback) ->
 		q = {
 			id		: question.id,
@@ -17,6 +17,7 @@ genStats = (questions, callback) ->
 			type	: question.type
 		}
 		q.answers = []
+		tokens = []
 		async.series([
 			(callback) ->
 				async.eachLimit question.answers, 3, (answer, callback) ->
@@ -41,7 +42,7 @@ genStats = (questions, callback) ->
 						callback(err)
 					else
 						# All answers for the question have been processed
-						
+				
 						callback(null)
 			,
 			(callback) ->
@@ -56,12 +57,12 @@ genStats = (questions, callback) ->
 							q.answer_count = count
 							callback(null)
 				)
-		
+
 		], (err) ->
 			data.push(q)
 			callback(null)
 		)
-			
+	
 
 	, (err) ->
 		if err
@@ -69,8 +70,6 @@ genStats = (questions, callback) ->
 		else
 			# All questions have been processed
 			callback(null, data)
-	
-	
 
 exports.getAnswers = (req, res) ->
 	id = req.param('id')
@@ -83,7 +82,7 @@ exports.getAnswers = (req, res) ->
 					msg : err.msg
 				})
 			else
-				genStats survey.questions, (err, data) ->
+				genStats id, survey.questions, (err, data) ->
 					if err
 						res.send({
 							err : 1,

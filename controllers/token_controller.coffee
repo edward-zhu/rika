@@ -9,7 +9,7 @@ exports.upsert = (req, res) ->
 		state = req.body.state
 		console.log(token + " finished")
 		Token
-			.update({token : token}, {$set : {state : req.body.state}},{upsert : true})
+			.update({token : token}, {$set : {state : req.body.state, survey : survey_id}},{upsert : true})
 			.exec()
 		res.send({
 			err : 0

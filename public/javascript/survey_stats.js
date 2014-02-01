@@ -12,8 +12,8 @@ function genTextAns(question, page, first_time) {
 			page	: page
 		}
 	}).done(function (data) {
-		console.log(page);
-		console.log(data);
+		// console.log(page);
+		// console.log(data);
 		data._id = question._id;
 		data.id = question.id;
 		data.question = question.question;
@@ -42,6 +42,8 @@ function genTextAns(question, page, first_time) {
 }
 
 function getStats(callback) {
+	$("#stats_list").html("");
+	$("#loader").addClass("active");
 	$.ajax('/getanswer', {
 		type : 'GET',
 		data : {
@@ -84,5 +86,19 @@ $(document).ready(function () {
 			html_for_textans = h;
 			getStats();
 		})
-	})
-})
+	});
+	$("#trim_action").click(function () {
+		$.post('/trim', {
+			survey_id : $("#survey_id").val()
+		}, function (data) {
+			if (data.err === 0) {
+				alert(data.msg);
+				getStats();
+			}
+			else {
+				alert("执行失败");
+				// console.log(data.msg);
+			}
+		});
+	});
+});

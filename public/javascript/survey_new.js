@@ -7,7 +7,7 @@ function submitForm() {
 	var data = {
 		'title' : title,
 	};
-	console.log(data);
+	// console.log(data);
 	$.post('/survey/', data, function(resData) {
 		$('#survey_form').removeClass('loading');
 		if (resData.err === 0) {

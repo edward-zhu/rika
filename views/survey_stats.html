@@ -9,22 +9,34 @@
 {% endblock %}
 
 {% block content %}
+	<h2 class="ui header">
+		{{ survey.title }}
+		<div class="sub header">调查数据</div>
+	</h2>
 	<div class="ten wide column">
-		<h2 class="ui header">
-			{{ survey.title }}
-			<div class="sub header">调查数据</div>
-		</h2>
+		
 		<div class="ui raised segment">
+			<h3 class="ui header">调查数据</h3>
 			<div class="ui active inverted dimmer" id="loader">
 				<div class="ui large text loader">Loading</div>
 			</div>
+			
 			<div class="ui list" id="stats_list">
 				
 			</div>
-			
 		</div>
 		
 		<input type="hidden" id="survey_id" value="{{ survey._id }}">
+	</div>
+	<div class="six wide column">
+		<div class="ui raised segment">
+			<h3 class="ui header">清除冗余数据</h3>
+			<div class="ui warning message">
+				<i class="ui warning icon"></i>
+				注意！可能会清除正在填写的答案数据。
+			</div>
+			<div class="ui red button" id="trim_action">执行操作</div>
+		</div>
 	</div>
 {% endblock %}
 
