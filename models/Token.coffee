@@ -11,6 +11,10 @@ tokenSchema = new mongoose.Schema
 		type 	: String,
 		enum	: states
 	}
+	date	: {
+		type	: Date,
+		default	: Date.now
+	}
 	survey	: {
 		type	: Number,
 		ref		: 'Survey'

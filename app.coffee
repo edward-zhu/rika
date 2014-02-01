@@ -78,6 +78,7 @@ app.get		'/signup'				,	user.new
 app.post	'/signup'				,	user.create
 app.post	'/token'				,	token.upsert
 app.post	'/trim'					,	response.trimResp
+app.get		'/survey/:id/takers'	,	token.get
 		
 app.listen process.env.PORT || 3000
 console.log "server running at port 3000."

@@ -23,11 +23,12 @@ exports.get = (req, res) ->
 								req.session.survey_id = req.params.id
 								token = sha1.digest('hex')
 								req.session.token = token
+								Token
+									.update({token : token}, {$set : {state : "used", survey: req.params.id, date: Date.now()}},{upsert : true})
+									.exec()
 							else
 								token = req.session.token
-							Token
-								.update({token : token}, {$set : {state : "used", survey: req.params.id}},{upsert : true})
-								.exec()
+							
 							res.render('survey', {survey : survey})
 						'application/json' : ->
 							res.send(survey)

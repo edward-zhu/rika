@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}{% parent %} - {{survey.title}} 调查者{% endblock %}
+
+{% block head %}
+	
+	<link rel="stylesheet" href="/css/survey.css" type="text/css" charset="utf-8">
+	{% parent %}
+{% endblock %}
+
+{% block content %}
+	<h2 class="ui header">
+		{{ title }}
+		<div class="sub header">调查者数据</div>
+	</h2>
+	<div class="sixteen wide column">
+		<table class="ui table segment">
+		  <thead>
+		    <tr><th>Token</th>
+		    <th>时间</th>
+		    <th>状态</th>
+		  </tr></thead>
+		  <tbody>
+				{% for token in tokens %}
+		    <tr>
+		      <td>{{ token.token }}</td>
+		      <td id="date">{{ token.date.toString() }}</td>
+		      <td>{{ token.state }}</td>
+		    </tr>
+				{% endfor %}
+		  </tbody>
+		</table>
+	</div>
+{% endblock %}
+
+{% block js %}
+<script src="/javascript/moment-with-langs.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+moment.lang("zh-CN");
+$("td#date").each(function () {
+	$(this).html(moment($(this).html()).fromNow());
+});
+</script>
+{% endblock %}
