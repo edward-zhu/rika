@@ -43,13 +43,17 @@ exports.trimResp = (req, res) ->
 	survey_id = req.param("survey_id")
 	async.series [
 		(callback) ->
-			Token.find({state : /used/, survey : survey_id}, (err, result) ->
-				if err?
-					callback(err)
-				else
-					tokens = result
-					callback(null)
-			)
+			Token
+				.find({state : /used/, survey : survey_id, date : {$lte : Date.now() - 600}})
+				.remove()
+				.exec((err, results) ->
+					if err?
+						callback(err)
+					else
+						console.log(results)
+						tokens = results
+						callback(null)
+				)
 		,
 		(callback) ->
 			async.eachLimit tokens, 3, (token, callback) ->

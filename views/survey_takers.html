@@ -14,6 +14,7 @@
 		<div class="sub header">调查者数据</div>
 	</h2>
 	<div class="sixteen wide column">
+		<div class="ui red button" id="trim_action">清除十分钟内未完成的数据</div>
 		<table class="ui table segment">
 		  <thead>
 		    <tr><th>Token</th>
@@ -36,9 +37,24 @@
 {% block js %}
 <script src="/javascript/moment-with-langs.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
+$("#trim_action").click(function () {
+	$.post('/trim', {
+		survey_id : $("#survey_id").val()
+	}, function (data) {
+		if (data.err === 0) {
+			alert(data.msg);
+			getStats();
+		}
+		else {
+			alert("执行失败");
+			// console.log(data.msg);
+		}
+	});
+});
 moment.lang("zh-CN");
 $("td#date").each(function () {
 	$(this).html(moment($(this).html()).fromNow());
 });
+
 </script>
 {% endblock %}
