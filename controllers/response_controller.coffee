@@ -44,19 +44,21 @@ exports.trimResp = (req, res) ->
 	async.series [
 		(callback) ->
 			Token
-				.find({state : /used/, survey : survey_id, date : {$lte : Date.now() - 600}})
-				.remove()
+				.find({state : /used/, survey : survey_id, date : {$lte : new Date(Date.now() - 20000)}})
 				.exec((err, results) ->
 					if err?
 						callback(err)
 					else
-						console.log(results)
+						# console.log(results)
 						tokens = results
 						callback(null)
 				)
 		,
 		(callback) ->
 			async.eachLimit tokens, 3, (token, callback) ->
+				console.log("removing token..")
+				console.log(token.token)
+				Token.remove({token : token.token}).exec()
 				Response
 					.remove({
 						survey	: survey_id,
