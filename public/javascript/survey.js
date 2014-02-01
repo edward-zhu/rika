@@ -159,6 +159,7 @@ function loadTextQuestion(question, total, callback) {
 }
 
 function finish() {
+	window.onbeforeunload = function () {};
 	$("#question_form").load('/partials/question_finish.html');
 	$("#question_form").removeClass("loading");
 }
@@ -201,6 +202,11 @@ function loadUI(callback) {
 }
 
 $(document).ready(function () {
+	window.onbeforeunload = function()
+	{
+	    return "您还没有填完问卷，如果您现在离开将会对数据统计造成麻烦，真的要离开吗？";
+	}
+	
 	$("#go").addClass("disabled");
 	$("#go").html("<i class='ui play icon'></i>加载UI..");
 	loadUI(function () {
