@@ -12,7 +12,7 @@ app = express()
 app.engine('html', swig.renderFile)
 
 mongoose.connect("mongodb://edward:mtmtmt@troup.mongohq.com:10018/survey")
-#mongoose.connect("mongodb://localhost/survey")
+#cmongoose.connect("mongodb://localhost/survey")
 
 app.configure ->
 	app.set "port", 3000

@@ -206,8 +206,6 @@ function loadUI(callback) {
 }
 
 $(document).ready(function () {
-	
-	
 	$("#go").addClass("disabled");
 	$("#go").html("<i class='ui play icon'></i>加载UI..");
 	loadUI(function () {
@@ -223,7 +221,6 @@ $(document).ready(function () {
 		});
 		taker_token = CryptoJS.SHA1(Date() + $("#survey_id").val() + Math.random().toString()).toString();
 	});
-	
 });
 
 
