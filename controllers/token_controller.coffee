@@ -34,6 +34,7 @@ exports.get = (req, res) ->
 					})
 				else
 					res.render('survey_takers', {
+						survey_id : survey._id,
 						title  : survey.title,
 						tokens : tokens
 					})
