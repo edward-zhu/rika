@@ -33,6 +33,7 @@ app.configure ->
 	)
 	app.use flash()
 	app.use app.router
+	app.use(express.compress());
 	app.use express.static(path.join(__dirname,'public'))
 
 if 'development' == app.get('env')
