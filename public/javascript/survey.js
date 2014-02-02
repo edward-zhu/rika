@@ -25,9 +25,20 @@ function loadQuestions(callback) {
 	var survey_id = $("#survey_id").val();
 	$.ajax('/survey/' + survey_id + '/', {
 		dataType : 'json'
-	}).done(function (data) {
+	}).done(function (data, textStatus) {
 		// console.log(data);
-		callback(data.questions.sort(sortBy));
+		console.log(textStatus);
+		if (data.questions && data.questions.length > 0)
+		{
+			callback(data.questions.sort(sortBy));
+		}
+		else {
+			alert("问题载入失败，或问卷未准备好，请刷新");
+			location.reload();
+		}
+	}).fail(function () {
+		alert("问题载入失败，或问卷未准备好，请刷新");
+		location.reload();
 	});
 }
 
