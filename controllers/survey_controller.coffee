@@ -6,16 +6,15 @@ error = require '../helpers/err'
 
 exports.get = (req, res) ->
 	if req.params.id?
-		Survey
-			.findById(req.params.id)
-			.exec((err, survey) ->
-				if err? or not survey?
-					error(res, "找不到该问卷")
-				else
-					res.format 
-						'text/html' : ->
-							console.log(req.session.survey_id)
-							console.log(req.session.token)
+		res.format 
+			'text/html' : ->
+				Survey
+					.findById(req.params.id)
+					.select("_id title")
+					.exec((err, survey) ->
+						if err? or not survey?
+							error(res, "找不到该问卷")
+						else
 							if not req.session.token? or req.session.survey_id != req.params.id
 								crypto = require 'crypto'
 								sha1 = crypto.createHash('sha1')
@@ -28,11 +27,17 @@ exports.get = (req, res) ->
 									.exec()
 							else
 								token = req.session.token
-							
 							res.render('survey', {survey : survey})
-						'application/json' : ->
+					)
+			'application/json' : ->
+				Survey
+					.findById(req.params.id)
+					.exec((err, survey) ->
+						if err? or not survey?
+							error(res, "找不到该问卷")
+						else
 							res.send(survey)
-			)
+					)
 	else
 		error(res, "找不到网页")
 		
