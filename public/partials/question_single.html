@@ -8,17 +8,32 @@
 	</span>
 </div>
 <div class="ui raised segment" id="inner_form">
+	{{#text}}
+	<div class="ui fluid input">
+		<input type="text" placeholder="在这里填入答案"  id="answer">
+	</div>
+	{{/text}}
+	{{^text}}
 	<div class="ui small error message"></div>
   <div class="grouped inline fields">
 		{{#answers}}
     <div class="field">
+			{{#single}}
       <div class="ui radio checkbox">
         <input type="radio" name="answer" value="{{ _id }}">
         <label>{{ answer }}</label>
-      </div>     
+      </div> 
+			{{/single}}
+			{{#multiple}}
+      <div class="ui checkbox">
+        <input type="checkbox" name="answer" value="{{ _id }}">
+        <label>{{ answer }}</label>
+      </div>
+			{{/multiple}}    
     </div>
 		{{/answers}}
   </div>
+	{{/text}}
 </div>
 <div class="ui aligned left basic segment">
 	<div class="ui submit blue button">下一个</div>

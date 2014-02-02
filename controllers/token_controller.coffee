@@ -23,21 +23,33 @@ exports.upsert = (req, res) ->
 
 exports.get = (req, res) ->
 	Survey.findById(req.param("id"), 'title' ,(err, survey) ->
-		Token
-			.find({survey : survey._id})
-			.sort('-date')
-			.exec((err, tokens) ->
-				if err?
-					res.send({
-						err : 1,
-						msg : err.msg
-					})
-				else
-					res.render('survey_takers', {
-						survey_id : survey._id,
-						title  : survey.title,
-						tokens : tokens
-					})
-			)
+		if not survey?
+			res.send({
+				err : 1,
+				msg : "该问卷不存在"
+			})
+		else
+			Token
+				.find({survey : survey._id})
+				.sort('-date')
+				.exec((err, tokens) ->
+					if err?
+						res.send({
+							err : 1,
+							msg : err.msg
+						})
+					else
+						finished = 0
+						for token in tokens
+							if token.state == "finished"
+								finished++
+						res.render('survey_takers', {
+							survey_id	: survey._id,
+							title		: survey.title,
+							finished	: finished,
+							total 		: tokens.length,
+							tokens 		: tokens
+						})
+				)
 	)
 	

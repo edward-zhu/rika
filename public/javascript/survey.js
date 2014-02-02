@@ -1,7 +1,7 @@
 var data;
 var questions = [];
 var taker_token;
-var html_sing, html_multi, html_text;
+var html;
 
 var rules = 
 	{
@@ -40,29 +40,51 @@ function getPos(id, answers) {
 	return -1;
 }
 
-function loadSingleQuestion(question, total, callback) {
+function loadOneQuestion(question, total, callback) {
 	var data = question;
 	data.total = total;
-	$("#question_form").html(Mustache.render(html_sing, data));
+	if (question.type === "single") {
+		data.single = true;
+	} else if (question.type === "multiple") {
+		data.multiple = true;
+	} else {
+		data.text = true;
+	}
+	$("#question_form").html(Mustache.render(html, data));
 	callback();
 	$(".ui.checkbox").checkbox();
 	$(".ui.form").form(rules,{
 		onSuccess: function () {
-			$("#question_form").addClass("loading");
-			var answer_id = $("input:checked").val();
-			var answers = [
-				{
-					answer_id : answer_id
-				}
-			]
-			var pos = getPos(answer_id, question.answers);
 			var next = question.id + 1;
 			if (question.next) {
 				next = question.next;
 			}
-			if (question.answers[pos].next) {
-				next = question.answers[pos].next;
+			$("#question_form").addClass("loading");
+			if(question.type === "single") {
+				var answer_id = $("input:checked").val();
+				var answers = [
+					{
+						answer_id : answer_id
+					}
+				]
+				var pos = getPos(answer_id, question.answers);
+				if (question.answers[pos].next) {
+					next = question.answers[pos].next;
+				}
+			} else if (question.type === "multiple") {
+				var answers = [];
+				$("input:checked").each(function (i, answer) {
+					answers[i] = {
+						answer_id : $(answer).val()
+					}
+				});
+			} else {
+				var answers = [{
+					answer_id	: question._id,
+					answer		: $("#answer").val()
+				}];
 			}
+			
 			$.ajax('/response',{
 				data : {
 					survey_id 	: $("#survey_id").val(),
@@ -78,79 +100,8 @@ function loadSingleQuestion(question, total, callback) {
 		},
 		rules : {
 			checked_check : function () {
-				return $("input:checked").length > 0;
+				return $("input:checked").length > 0 || question.type === "text";
 			}
-		}
-	});
-}
-
-function loadMultipleQuestion(question, total, callback) {
-	var data = question;
-	data.total = total;
-	$("#question_form").html(Mustache.render(html_multi, data));
-	callback();
-	$(".ui.checkbox").checkbox();
-	$(".ui.form").form(rules ,{
-		onSuccess: function () {
-			$("#question_form").addClass("loading");
-			var answers = [];
-			$("input:checked").each(function (i, answer) {
-				answers[i] = {
-					answer_id : $(answer).val()
-				}
-			});
-			console.log(answers);
-			var next = question.id + 1;
-			if (question.next) {
-				next = question.next;
-			}
-			$.ajax('/response',{
-				data : {
-					survey_id 	: $("#survey_id").val(),
-					answers		: answers,
-					question_id	: question._id
-				},
-				type : 'POST'
-			}).done(function (data) {
-				loadQuestion(next);
-			});
-		},
-		rules : {
-			checked_check : function () {
-				return $("input:checked").length > 0;
-			}
-		}
-	});
-}
-
-function loadTextQuestion(question, total, callback) {
-	var data = question;
-	data.total = total;
-	
-	$("#question_form").html(Mustache.render(html_text, data));
-	callback();
-	$(".ui.form").form({},{
-		onSuccess: function () {
-			$("#question_form").addClass("loading");
-			var answers = [{
-				answer_id	: question._id,
-				answer		: $("#answer").val()
-			}];
-			console.log(answers);
-			var next = question.id + 1;
-			if (question.next) {
-				next = question.next;
-			}
-			$.ajax('/response',{
-				data : {
-					survey_id 	: $("#survey_id").val(),
-					answers		: answers,
-					question_id	: question._id
-				},
-				type : 'POST'
-			}).done(function (data) {
-				loadQuestion(next);
-			});
 		}
 	});
 }
@@ -181,27 +132,13 @@ function loadQuestion(id) {
 		
 	}
 	
-	if (question.type === 'single') {
-		loadSingleQuestion(question, total, callback);
-	} 
-	else if (question.type === 'multiple') {
-		loadMultipleQuestion(question, total, callback);
-	}
-	else if (question.type === 'text') {
-		loadTextQuestion(question, total, callback);
-	}
+	loadOneQuestion(question, total, callback);
 }
 
 function loadUI(callback) {
-	$.get('/partials/question_single.html', function (html) {
-		html_sing = html;
-		$.get('/partials/question_multiple.html', function (html) {
-			html_multi = html;
-			$.get('/partials/question_text.html', function (html) {
-				html_text = html;
-				callback();
-			});
-		});
+	$.get('/partials/question_single.html', function (html_data) {
+		html = html_data;
+		callback();
 	});
 }
 
