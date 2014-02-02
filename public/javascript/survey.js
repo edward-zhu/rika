@@ -103,11 +103,15 @@ function loadOneQuestion(question, total, callback) {
 					answers		: answers,
 					question_id	: question._id
 				},
-				type : 'POST'
+				type : 'POST',
+				timeout : 8000
 			}).done(function (data) {
 				console.log(next);
 				
 				loadQuestion(next);
+			}).fail(function () {
+				alert("答案提交失败，请刷新重新填写，抱歉。");
+				location.reload();
 			});
 		},
 		rules : {
