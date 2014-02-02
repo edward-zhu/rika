@@ -24,6 +24,7 @@ function sortBy(a, b) {
 function loadQuestions(callback) {
 	var survey_id = $("#survey_id").val();
 	$.ajax('/survey/' + survey_id + '/', {
+		timeout : 6000,
 		dataType : 'json'
 	}).done(function (data, textStatus) {
 		// console.log(data);
