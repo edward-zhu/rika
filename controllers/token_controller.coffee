@@ -10,10 +10,11 @@ exports.upsert = (req, res) ->
 		console.log(token + " finished")
 		Token
 			.update({token : token}, {$set : {state : req.body.state, survey : survey_id, date: Date.now()}},{upsert : true})
-			.exec()
-		res.send({
-			err : 0
-		})
+			.exec((err) ->
+				res.send({
+					err : 0
+				})
+			)
 	else
 		res.send({
 			err : 1,

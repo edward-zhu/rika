@@ -123,15 +123,20 @@ function loadOneQuestion(question, total, callback) {
 }
 
 function finish() {
-	window.onbeforeunload = function () {};
+	
 	$.post('/token',{
 		survey_id : $("#survey_id").val(),
-		state : "finished"
-	},function(data) {
+		state : "finished",
+		timeout : 5000
+	}).done(function(data) {
 		console.log(data)
 		$("#question_form").load('/partials/question_finish.html', function () {
 			$("#question_form").removeClass("loading");
 		});
+		window.onbeforeunload = function () {};
+	}).fail(function() {
+		alert("答案提交超时，请重新填写，抱歉。");
+		location.reload();
 	})
 }
 
@@ -168,7 +173,7 @@ loadUI(function () {
 		$("#go").html("<i class='ui play icon'></i>开始");
 		window.onbeforeunload = function()
 		{
-		    return "您还没有填完问卷，如果您现在离开您的选择都将不被保存，真的要离开吗？";
+		    return "您还没有填完问卷或者结果还没有完成提交，如果您现在离开您的选择都将不被保存，真的要离开吗？";
 		}
 	});
 	taker_token = CryptoJS.SHA1(Date() + $("#survey_id").val() + Math.random().toString()).toString();
