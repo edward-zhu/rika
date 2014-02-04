@@ -2,6 +2,17 @@ body {
     font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
+#loka {
+	width : 96px;	
+	position : absolute;
+	right : 10%;	
+	top : 10px;
+}
+
+#menu {
+	padding-top: 60px;
+}
+
 .ui.small.form label {
 	font-weight: bold;
 }

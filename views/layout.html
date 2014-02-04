@@ -14,18 +14,18 @@
 	<body>
 		
 		<div class="ui page stackable grid">
-			<div class="ui transparent inverted blue menu">
-				<a class="item" href="/"><strong>Rika</strong></a>
-				<div class="right menu">
-					<a class="item" href="/my">
-						我的调查
-					</a>
-					<a class="item" href="/new">
-						新调查
-					</a>
+				<div class="ui secondary pointing menu" id="menu">
+					<img src="/images/loka.png" id="loka">	
+					<a class="active item" href="/"><strong>Rika</strong></a>
+						<a class="item" href="/my">
+							我的调查
+						</a>
+						<a class="item" href="/new">
+							新调查
+						</a>
+						
 				</div>
-			</div>
-			
+
 			
 			{% block content %} {% endblock %}
 			<div class="sixteen wide column">
