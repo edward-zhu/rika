@@ -1,5 +1,5 @@
 body {
-	background-image : url("/images/back_img.png");
+	background-image : url("/images/crossword.png");
     font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
@@ -9,6 +9,7 @@ body {
 	right : 10%;	
 	top : 10px;
 }
+
 
 #menu {
 	padding-top: 60px;
@@ -22,13 +23,40 @@ body {
 	/*font-size: 0.875em;*/
 }
 
+@keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 100% 100%; }
+}
+
+@-webkit-keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 100%; }
+}
+@-ms-keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 100%; }
+}
+@-moz-keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 100%; }
+}
+
+
 .masthead {
 	margin-top:38px;
 	padding: 50px 0px;
-	background-color: #005899;
+	background-image : url('/images/header_1.jpg');
+	background-position : 0px 0px;
+	background-repeat:no-repeat;
+	animation: animatedBackground 30s linear infinite;
+	-ms-animation: animatedBackground 30s linear infinite;
+	-moz-animation: animatedBackground 30s linear infinite;
+	-webkit-animation: animatedBackground 30s linear infinite;
 	color: #FFF;
 	text-align: center;
 	border-radius: 10px;
+	
+	
 }
 
 .masthead header {
@@ -39,5 +67,6 @@ body {
 
 .masthead .introduction {
 	padding-bottom: 10px;
+	text-shadow: 2px 2px 2px #CCC;
 }
 
