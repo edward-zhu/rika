@@ -25,29 +25,29 @@ body {
 
 @keyframes animatedBackground {
     from { background-position: 0 0; }
-    to { background-position: 100% 100%; }
+    to { background-position: 100% 0%; }
 }
 
 @-webkit-keyframes animatedBackground {
 	from { background-position: 0 0; }
-	to { background-position: 100% 100%; }
+	to { background-position: 100% 0%; }
 }
 @-ms-keyframes animatedBackground {
 	from { background-position: 0 0; }
-	to { background-position: 100% 100%; }
+	to { background-position: 100% 0%; }
 }
 @-moz-keyframes animatedBackground {
 	from { background-position: 0 0; }
-	to { background-position: 100% 100%; }
+	to { background-position: 100% 0%; }
 }
 
 
 .masthead {
 	margin-top:38px;
 	padding: 50px 0px;
-	background-image : url('/images/header_1.jpg');
+	background-image : url('/images/food.png');
 	background-position : 0px 0px;
-	background-repeat:no-repeat;
+	background-repeat:repeat;
 	animation: animatedBackground 30s linear infinite;
 	-ms-animation: animatedBackground 30s linear infinite;
 	-moz-animation: animatedBackground 30s linear infinite;
