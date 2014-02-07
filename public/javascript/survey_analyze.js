@@ -127,7 +127,7 @@ $('.ui.form').form({
 	rules : {
 		range_check : function (value) {
 			console.log(value);
-			return value > 0 && value < $('tr').length - 1;
+			return value > 0 && value <= questions.length;
 		}
 	},
 	onSuccess : function () {
