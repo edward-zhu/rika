@@ -58,19 +58,21 @@ app.get '/',
 		res.render 'index'
 
 app.get 	'/new'					,	survey.new 
+
 app.get		'/survey/:id/edit'		,	survey.edit
 app.get		'/survey/:id/'			,	survey.get
-app.get		'/survey/'				,	survey.get
-app.post	'/survey/'				,	survey.create
 app.put		'/survey/:id/'			,	survey.modify
 app.get		'/survey/:id/stats'		,	survey.getStats
+app.get		'/survey/:id/takers'	,	token.get
+app.get		'/survey/:id/analyze'	,	survey.analyze
+
+app.get		'/survey/'				,	survey.get
+app.post	'/survey/'				,	survey.create
 app.post	'/question/'			,	question.create
 app.delete	'/question/'			,	question.delete
 app.post	'/response'				,	response.create
-
 app.get		'/getanswer'			,	answer.getAnswers
 app.get		'/gettextans'			,	answer.getTextAnswers
-
 app.post	'/login'				,	login.login
 app.get		'/login'				,	login.get
 app.get		'/my'					,	survey.getUserSurveys
@@ -78,7 +80,7 @@ app.get		'/signup'				,	user.new
 app.post	'/signup'				,	user.create
 app.post	'/token'				,	token.upsert
 app.post	'/trim'					,	response.trimResp
-app.get		'/survey/:id/takers'	,	token.get
+app.post	'/getrelans'			,	answer.getRelativeAnswers
 		
 app.listen process.env.PORT || 3000
 console.log "server running at port 3000."

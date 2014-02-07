@@ -73,12 +73,12 @@ exports.edit = (req, res) ->
 	if not req.params.id?
 		error(res, '未提供id')
 	else
-		Survey.findById req.params.id, 'user', (err, survey) ->
+		Survey.findById req.params.id, 'title user', (err, survey) ->
 			if err? or not survey? or survey.user != req.session.user
 				req.flash('info',"您没有编辑的权限，请以该问卷管理者身份登录以进行操作")
 				res.redirect '/login'
 			else
-				res.render('survey_edit', {id : req.params.id})
+				res.render('survey_edit', survey)
 	
 exports.modify = (req, res) ->
 	if req.body.modify_type == 'order'
@@ -140,3 +140,24 @@ exports.getUserSurveys = (req, res) ->
 						surveys : surveys
 					})
 			)
+			
+sortBy = (a, b) ->
+	a.id - b.id
+			
+exports.analyze = (req, res) ->
+	res.format
+		'text/html' : ->
+			Survey.findById req.params.id, 'title', (err, survey) ->
+				if err? or not survey?
+					error(res, err.msg) if err?
+					error(res, "找不到该调查。") if not survey?
+				else
+					res.render('survey_analysis', { survey : survey })
+		'application/json' : ->
+			Survey.findById req.params.id, 'title questions.question questions.id questions.type', (err, survey) ->
+				if err? or not survey?
+					error(res, err.msg) if err?
+					error(res, "找不到该调查。") if not survey?
+				else
+					survey.questions.sort(sortBy)
+					res.send(survey)

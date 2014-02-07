@@ -11,8 +11,8 @@
 {% block content %}
 	<div class="sixteen wide column">
 		<h2 class="ui header">
-			问卷设计
-			<div class="sub header">编辑问卷内容</div>
+			{{ title }}
+			<div class="sub header">控制面板</div>
 		</h2>
 		<div class="ui basic segment" id="toolbelt">
 			
@@ -20,9 +20,17 @@
 				<i class="add icon"></i>
 				新建问题
 			</a>
-			<a class="ui tiny labeled button" href="#add_q">
+			<a class="ui tiny teal labeled button" href="#add_q">
 				<i class="share icon"></i>
 				调查地址
+			</a>
+			<a class="ui tiny blue labeled button" href="/survey/{{_id}}/stats">
+				<i class="list layout icon"></i>
+				简单结果
+			</a>
+			<a class="ui tiny blue labeled button" href="/survey/{{_id}}/analyze">
+				<i class="sitemap icon"></i>
+				关联分析
 			</a>
 			
 		</div>
@@ -49,7 +57,7 @@
 			<div class="ten wide column">
 				<div class="ui raised segment">
 					<div class="ui fluid action small input">
-					  <input type="text" value="http://rikachan.herokuapp.com/survey/{{ id }}/" id="survey-url">
+					  <input type="text" value="http://rikarika.org/survey/{{ _id }}/" id="survey-url">
 					  <div class="ui teal right small icon button" id="copy"><i class="copy icon"></i></div>
 					</div>
 				</div>
@@ -105,7 +113,7 @@
 			</div>
 		</div>
 		
-		<input type="hidden" id="survey_id" value="{{ id }}">
+		<input type="hidden" id="survey_id" value="{{ _id }}">
 	</div>
 {% endblock %}
 

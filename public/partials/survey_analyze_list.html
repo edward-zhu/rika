@@ -1,0 +1,36 @@
+<table class="ui table">
+	<thead>
+		<tr>
+			<th class="two wide">编号</th>
+			<th class="ten wide">问题</th>
+			<th class="four wide">设置问题为</th>
+		</tr>	
+	</thead>
+	<tbody>
+		{{#questions}}
+		<tr>
+			<td>{{ id }}</td>
+			<td>{{ question }}</td>
+			<td>
+				{{^text}}
+				<a class="ui tiny orange button" id="set_base" data-value="{{ id }}">基础</a>
+				<a class="ui tiny teal button" id="set_ref" data-value="{{ id }}">参考</a>
+				{{/text}}
+			</td>
+		</tr>
+		{{/questions}}
+	</tbody>
+</table>
+<div class="ui small pagination menu" id="page_menu">
+	{{^first_page}}
+  <a class="item" id="prev">
+    <i class="icon left arrow"></i>上一页
+	</a>
+	{{/first_page}}
+	<div class="item">{{ page }} / {{ total }}</div>
+	{{^last_page}}
+  <a class="item" id="next">
+    下一页<i class="icon right arrow"></i>
+  </a>
+	{{/last_page}}
+</div>

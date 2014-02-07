@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}{% parent %} - 数据分析{% endblock %}
+
+{% block head %}
+	
+	<link rel="stylesheet" href="/css/survey.css" type="text/css" charset="utf-8">
+	
+	{% parent %}
+	<link rel="stylesheet" href="http://cdn.staticfile.org/jqPlot/1.0.8/jquery.jqplot.min.css" type="text/css" charset="utf-8">
+{% endblock %}
+
+{% block content %}
+	<h2 class="ui header">
+		{{ survey.title }}
+		<div class="sub header">数据关联分析</div>
+	</h2>
+	<div class="stackable ui grid">
+		<div class="eight wide column" id="q_list">
+			
+		</div>
+		<div class="eight wide column">
+			<div class="ui segment">
+				<div class="ui form">
+					<div class="ui error message"></div>
+					<div class="two fields">
+						<div class="field">
+							<label>基础问题</label>
+							<input placeholder="输入基础问题的编号" type="text" id="base_id" name="base_id">
+						</div>
+						<div class="field">
+							<label>参考问题</label>
+							<input placeholder="输入参考问题的编号" type="text" id="ref_id" name="ref_id">
+						</div>
+					</div>
+					<a class = "ui blue submit button" id="submit_button">获取分析数据</a>
+					<a class = "ui purple button" id="swap_button">调换问题顺序</a>
+				</div>
+			</div>
+			<div class="ui segment">
+				<h4 class="ui header">分析结果</h4>
+					<div id="chart" style="height:21.5em;width:85%; "></div>	
+			</div>
+			
+		</div>
+		<input type="hidden" id="survey_id" value="{{ survey._id }}">
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script src="/javascript/mustache.js" type="text/javascript" charset="utf-8"></script>	
+	<script src="/javascript/survey_analyze.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://cdn.staticfile.org/jqPlot/1.0.8/jquery.jqplot.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://cdn.staticfile.org/jqPlot/1.0.8/plugins/jqplot.barRenderer.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://cdn.staticfile.org/jqPlot/1.0.8/plugins/jqplot.pointLabels.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://cdn.staticfile.org/jqPlot/1.0.8/plugins/jqplot.categoryAxisRenderer.min.js" type="text/javascript" charset="utf-8"></script>
+	
+{% endblock %}
