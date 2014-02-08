@@ -1,6 +1,7 @@
 var html = "";
 var perPage = 12;
 var questions = [];
+var chart = {};
 
 function createChartData(data) {
 	chart = {
@@ -86,7 +87,17 @@ $(document).ready(function() {
 		getSurvey(function () {
 			showPage(1);
 		})
-	})
+	});
+	$('#chart').bind('jqplotDataClick', 
+		function (ev, seriesIndex, pointIndex, data) {
+			var num = chart.data[seriesIndex][pointIndex];
+			var total = 0;
+			for (var i = 0; i < chart.data[seriesIndex].length; i++) {
+				total += chart.data[seriesIndex][i];
+			}
+	    	$('#result').html('value: '+num.toString() + ', percent: ' + (num / total * 100).toFixed(2));
+		}
+	); 
 	$('#swap_button').click(function() {
 		var temp = $('#base_id').val();
 		$('#base_id').val($('#ref_id').val());
