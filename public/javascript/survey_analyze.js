@@ -92,8 +92,8 @@ $(document).ready(function() {
 		function (ev, seriesIndex, pointIndex, data) {
 			var num = chart.data[seriesIndex][pointIndex];
 			var total = 0;
-			for (var i = 0; i < chart.data[seriesIndex].length; i++) {
-				total += chart.data[seriesIndex][i];
+			for (var i = 0; i < chart.data.length; i++) {
+				total += chart.data[i][pointIndex];
 			}
 	    	$('#result').html('value: '+num.toString() + ', percent: ' + (num / total * 100).toFixed(2));
 		}
