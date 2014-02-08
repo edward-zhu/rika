@@ -95,7 +95,15 @@ $(document).ready(function() {
 			for (var i = 0; i < chart.data.length; i++) {
 				total += chart.data[i][pointIndex];
 			}
-	    	$('#result').html('value: '+num.toString() + ', percent: ' + (num / total * 100).toFixed(2));
+			var sum = 0;
+			$.each(chart.data, function (i) {
+				$.each(chart.data[i], function (j, v) {
+					sum += v;
+				});
+			});
+	    	$('#result').html('该项值: '+ num.toString() +
+				 ', 值占纵行比率: ' + (num / total * 100).toFixed(2) + 
+				 ', 纵行占总比: ' + (total / sum * 100).toFixed(2));
 		}
 	); 
 	$('#swap_button').click(function() {
