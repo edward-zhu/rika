@@ -1,0 +1,79 @@
+body {
+	width:100%;
+}
+
+.header {
+	font-size: 1.75em;
+	padding : 2% 1.5em 0.5em 1em;
+	line-height : 1em;
+	font-weight: bold;
+}
+
+.divider {
+	height : 0.75em;
+	border-bottom : 2px #666 solid;
+	margin: 0px;
+}
+
+.list {
+	margin : 0em 2.5em 1em 1.75em;
+}
+
+ul {
+	padding: 0px;
+	margin:0px;
+}
+
+ul li {
+	padding: 0px;
+	margin:0px;
+	list-style-type : none;
+}
+
+table {
+	width : 100%;
+	border : 0px;
+	border-collapse:collapse;
+	border-spacing : 0;
+}
+
+th {
+	background-color : #CCC;
+}
+
+th, td {
+	
+	border : 0px;
+	padding : 0.5em;
+	
+}
+
+table tr:nth-child(even) {
+	background-color: #EEE;
+}
+
+th:first-child{
+    border-radius: 5px 0 0 0;
+}
+th:last-child{
+    border-radius: 0 5px 0 0;
+}
+tr:last-child td:first-child{
+    border-radius: 0 0 0 5px;
+}
+tr:last-child td:last-child{
+    border-radius: 0 0 5px 0;
+}
+
+.bar {
+	width : 40%;
+	height : 20px;
+	float : left;
+	background-color : #999;
+}
+
+.value {
+	float : right;
+	width : 8em;
+	text-align : right;
+}

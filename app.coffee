@@ -51,6 +51,7 @@ answer = require './controllers/answer_controller'
 login = require './controllers/login_controller'
 user = require './controllers/user_controller'
 token = require './controllers/token_controller'
+print = require './controllers/print_controller'
 
 	
 app.get '/',
@@ -64,6 +65,7 @@ app.get		'/survey/:id/'			,	survey.get
 app.put		'/survey/:id/'			,	survey.modify
 app.get		'/survey/:id/stats'		,	survey.getStats
 app.get		'/survey/:id/takers'	,	token.get
+app.get		'/survey/:id/print'		,	print.print
 app.get		'/survey/:id/analyze'	,	survey.analyze
 
 app.get		'/survey/'				,	survey.get
@@ -81,6 +83,7 @@ app.post	'/signup'				,	user.create
 app.post	'/token'				,	token.upsert
 app.post	'/trim'					,	response.trimResp
 app.post	'/getrelans'			,	answer.getRelativeAnswers
+
 		
 app.listen process.env.PORT || 3000
 console.log "server running at port 3000."
