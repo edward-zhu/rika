@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="/css/print.css" type="text/css">
 	<style type="text/css" media="print">
 		.page_break {
-			page-break-after:always;
+			page-break-before:always;
 		}
 	</style>
 	</style>
@@ -20,8 +20,13 @@
 	<div class="list">
 		<ul>
 			{% for question in questions%}
+			{% if count >= 24 && !loop.last %}
+				{% set count = 0 %}
+				<div class="page_break"></div>
+			{% endif %}
 			<li>
 				<h3>{{ question.question }}</h3>
+				{% set count += 3 %}
 				<table>
 					<thead>
 						<tr>
@@ -43,10 +48,6 @@
 					</tbody>
 				</table>
 			</li>
-			{% if count >= 10 %}
-				{% set count = 0 %}
-				<div class="page_break"></div>
-			{% endif %}
 			{% endfor %}
 		</ul>
 	</div>	
